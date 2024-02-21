@@ -47,6 +47,7 @@ INSERT INTO animals (name, type, age, enclosure_id) VALUES ('Gin', 'Lion', 3, 1)
 INSERT INTO animals (name, type, age, enclosure_id) VALUES ('Joe', 'Dolphin', 5, 2);
 INSERT INTO animals (name, type, age, enclosure_id) VALUES ('Luis', 'Penguins', 10, 2);
 INSERT INTO animals (name, type, age, enclosure_id) VALUES ('Emma', 'Parrot', 2, 3);
+INSERT INTO animals (name, type, age, enclosure_id) VALUES ('Amy', 'Falcon', 59, 3);
 
 INSERT INTO assignments (employee_id, enclosure_id, day) VALUES (1, 2, 'Monday');
 INSERT INTO assignments (employee_id, enclosure_id, day) VALUES (2, 1, 'Tuesday');
@@ -54,6 +55,7 @@ INSERT INTO assignments (employee_id, enclosure_id, day) VALUES (3, 1, 'Monday')
 INSERT INTO assignments (employee_id, enclosure_id, day) VALUES (2, 2, 'Monday');
 INSERT INTO assignments (employee_id, enclosure_id, day) VALUES (3, 2, 'Wednesday');
 INSERT INTO assignments (employee_id, enclosure_id, day) VALUES (1, 1, 'Friday');
+INSERT INTO assignments (employee_id, enclosure_id, day) VALUES (3, 3, 'Friday');
 
 -- MVP ANSWERS:
 -- Write queries to find:
@@ -70,3 +72,42 @@ INNER JOIN assignments AS a
 ON s.id = a.employee_id
 INNER JOIN enclosures AS e
 ON a.enclosure_id = e.id;
+
+-- Extenstions Answers:
+-- Write queries to find:
+-- The names of staff working in enclosures which are closed for maintenance:
+SELECT s.name, a.day, e.name
+FROM staffs AS s
+INNER JOIN assignments AS a
+ON s.id = a.employee_id
+INNER JOIN enclosures AS e
+ON a.enclosure_id = e.id 
+WHERE e.closedForMaintenance = true;
+
+-- The name of the enclosure where the oldest animal lives. If there are two animals who are the same age choose the first one alphabetically.:
+SELECT e.name, a.name,  a.age 
+FROM enclosures AS e 
+INNER JOIN animals AS a 
+ON e.id = a.enclosure_id 
+ORDER BY a.age DESC, a.name ASC LIMIT 1;
+
+-- answer without limit:
+SELECT e.name, a.name,  a.age 
+FROM enclosures AS e 
+INNER JOIN animals AS a 
+ON e.id = a.enclosure_id 
+ORDER BY a.age DESC, a.name ASC;
+
+-- The number of different animal types a given keeper has been assigned to work with.:
+
+-- The number of different keepers who have been assigned to work in a given enclosure:
+SELECT COUNT(DISTINCT s.name) 
+FROM staffs AS s 
+INNER JOIN assignments AS a 
+ON s.id = a.employee_id 
+INNER JOIN e
+nclosures AS e 
+ON a.enclosure_id = e.id 
+WHERE e.name = 'Bird Enclosure'; 
+
+-- The names of the other animals sharing an enclosure with a given animal (eg. find the names of all the animals sharing the big cat field with Tony):
