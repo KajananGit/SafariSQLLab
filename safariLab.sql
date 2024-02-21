@@ -36,3 +36,7 @@ CREATE TABLE assignments(
 INSERT INTO staffs (name, employeeNumber) VALUES ('Sigourney Weaver', 12345);
 INSERT INTO staffs (name, employeeNumber) VALUES ('Benedict Cumberbatch', 456789);
 INSERT INTO staffs (name, employeeNumber) VALUES ('Robert Downey Jr', 56789);
+
+INSERT INTO enclosure (name, capacity, closedForMaintenance) VALUES ('Predator Cat Enclosure', 5, false);
+INSERT INTO enclosure (name, capacity, closedForMaintenance) VALUES ('Sea Animal Enclosure', 6, false);
+INSERT INTO enclosure (name, capacity, closedForMaintenance) VALUES ('Bird Enclosure', 8, true);
