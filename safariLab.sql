@@ -99,6 +99,14 @@ ON e.id = a.enclosure_id
 ORDER BY a.age DESC, a.name ASC;
 
 -- The number of different animal types a given keeper has been assigned to work with.:
+SELECT COUNT(DISTINCT ani.type) FROM animals AS ani 
+INNER JOIN enclosures AS e 
+ON ani.enclosure_id = e.id 
+INNER JOIN assignments AS assign 
+ON e.id = assign.enclosure_id 
+INNER JOIN staffs AS s 
+ON assign.employee_id = s.id 
+WHERE s.name = 'Sigourney Weaver';
 
 
 -- The number of different keepers who have been assigned to work in a given enclosure:
