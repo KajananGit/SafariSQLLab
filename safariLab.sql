@@ -54,3 +54,19 @@ INSERT INTO assignments (employee_id, enclosure_id, day) VALUES (3, 1, 'Monday')
 INSERT INTO assignments (employee_id, enclosure_id, day) VALUES (2, 2, 'Monday');
 INSERT INTO assignments (employee_id, enclosure_id, day) VALUES (3, 2, 'Wednesday');
 INSERT INTO assignments (employee_id, enclosure_id, day) VALUES (1, 1, 'Friday');
+
+-- MVP ANSWERS:
+-- Write queries to find:
+-- The names of the animals in a given enclosure
+SELECT a.name, a.type, e.name 
+FROM enclosures AS e 
+INNER JOIN animals AS a 
+ON e.id = a.enclosure_id ;
+
+-- The names of the staff working in a given enclosure
+SELECT s.name, a.day, e.name
+FROM staffs AS s
+INNER JOIN assignments AS a
+ON s.id = a.employee_id
+INNER JOIN enclosures AS e
+ON a.enclosure_id = e.id;
