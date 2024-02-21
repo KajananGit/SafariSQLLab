@@ -31,3 +31,8 @@ CREATE TABLE assignments(
     enclosure_id INT REFERENCES enclosures(id),
     day VARCHAR(255)
 );
+
+
+INSERT INTO staffs (name, employeeNumber) VALUES ('Sigourney Weaver', 12345);
+INSERT INTO staffs (name, employeeNumber) VALUES ('Benedict Cumberbatch', 456789);
+INSERT INTO staffs (name, employeeNumber) VALUES ('Robert Downey Jr', 56789);
