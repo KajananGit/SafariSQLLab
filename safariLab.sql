@@ -100,14 +100,33 @@ ORDER BY a.age DESC, a.name ASC;
 
 -- The number of different animal types a given keeper has been assigned to work with.:
 
+
 -- The number of different keepers who have been assigned to work in a given enclosure:
 SELECT COUNT(DISTINCT s.name) 
 FROM staffs AS s 
 INNER JOIN assignments AS a 
 ON s.id = a.employee_id 
-INNER JOIN e
-nclosures AS e 
+INNER JOIN enclosures AS e 
 ON a.enclosure_id = e.id 
 WHERE e.name = 'Bird Enclosure'; 
 
+-- Another way of answering this question which gives the num of diff keepers assigned to all existing enclosure:
+SELECT COUNT(s.name), e.name
+FROM staffs AS s 
+INNER JOIN assignments AS a 
+ON s.id = a.employee_id 
+INNER JOIN enclosures AS e 
+ON a.enclosure_id = e.id 
+GROUP BY e.name; 
+
 -- The names of the other animals sharing an enclosure with a given animal (eg. find the names of all the animals sharing the big cat field with Tony):
+SELECT a.name, a.type, e.name 
+FROM enclosures AS e 
+INNER JOIN animals AS a 
+ON e.id = a.enclosure_id 
+WHERE e.name IN 
+( SELECT e.name 
+FROM enclosures AS e 
+INNER JOIN animals AS a 
+ON e.id = a.enclosure_id 
+WHERE a.name = 'Joe');
