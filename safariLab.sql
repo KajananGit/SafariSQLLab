@@ -63,7 +63,8 @@ INSERT INTO assignments (employee_id, enclosure_id, day) VALUES (3, 3, 'Friday')
 SELECT a.name, a.type, e.name 
 FROM enclosures AS e 
 INNER JOIN animals AS a 
-ON e.id = a.enclosure_id ;
+ON e.id = a.enclosure_id 
+WHERE e.id = 1;;
 
 -- The names of the staff working in a given enclosure
 SELECT s.name, a.day, e.name
@@ -71,7 +72,8 @@ FROM staffs AS s
 INNER JOIN assignments AS a
 ON s.id = a.employee_id
 INNER JOIN enclosures AS e
-ON a.enclosure_id = e.id;
+ON a.enclosure_id = e.id
+WHERE e.id = 1;;
 
 -- Extenstions Answers:
 -- Write queries to find:
